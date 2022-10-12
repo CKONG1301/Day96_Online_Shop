@@ -1,0 +1,60 @@
+{% block head %}
+<!-- Navigation Section -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand logo-brand" href="{{ url_for('home') }}">
+            <img class="logo-img" src="../static/images/CapricornElements_Brown.png" alt="Logo">
+        </a>
+        <span class="navbar-text">
+      <h3 class="logo-text">Capricorn Elements</h3>
+    </span>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse nav-display" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                </li>
+                {% if not current_user.is_authenticated: %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                </li>
+                {% else: %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbar-dropdown" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Products</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">Audio</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Appliance</a>
+                        </li>
+                        {% if current_user.id == 1: %}
+                        <li>
+                            <a class="dropdown-item" href="{{ url_for('add') }}">Add Product</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Support</a>
+                </li>
+            </ul>
+        </div>
+        <div class="fa-1x">
+            <a class="navbar-brand" href="{{ url_for('checkout') }}">
+                <i class="btn fa fa-cart-shopping"></i>
+                <span class="navbar-text">{{ cart }}</span>
+            </a>
+        </div>
+    </div>
+</nav>
+{% endblock %}

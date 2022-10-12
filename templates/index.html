@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<!--Listing Page-->
+<!--    Product List-->
+<div class="container-fluid" style="overflow-x:scroll;" id="product-list">
+    <h3>Welcome to Capricorn Elements Online Store!</h3>
+    <br>
+    <ul class="list-group list-group-horizontal">
+        {% for product in products: %}
+        {% if product.id == 1 %}
+        <li class="list-group-item active">
+            {% else %}
+        <li class="list-group-item">
+            {% endif %}
+                    <div class="row list-text">
+                <h5>{{ product.title }}</h5>
+            </div>
+            <div class="row">
+                <a href={{ url_for('buy', id=product.id) }}>
+                <img class="list-img" src={{ product.img }} alt={{ product.id }}>
+                </a>
+            </div>
+
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

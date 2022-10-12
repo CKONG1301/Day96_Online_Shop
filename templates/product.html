@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.title }}
+{% endblock %}
+
+{% block content %}
+<!-- Modal -->
+<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ product.title }}</h5>
+                <a href="{{url_for('home')}}" class="btn">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <img class="product-img" src={{ product.img }} align="center">
+                <hr>
+                <div class="product-text">
+                    <p>Model: {{ product.title }}</p>
+                    <p>Price: ${{ product.price }}</p>
+                    <p>Description:</p>
+                    <p>{{ product.description }}</p>
+                    <hr>
+                    <div style="width: 25%;">
+                        {{ wtf.quick_form(form, novalidate=True, button_map={'submit': 'primary'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function(){
+    console.log("window is loaded")
+    $("#product-modal").modal("show")
+})
+</script>
+{% endblock %}
